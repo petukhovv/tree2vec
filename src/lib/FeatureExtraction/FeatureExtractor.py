@@ -1,5 +1,3 @@
-import json
-
 from .Features import DepthExtractor
 
 
@@ -19,3 +17,11 @@ class FeatureExtractor:
                 raise Exception('Unsupported feature')
 
         self.features = features
+
+    def extract(self):
+        feature_values = {}
+
+        for feature in self.features:
+            feature_values[feature] = self.features[feature](self.ast)
+
+        return feature_values
