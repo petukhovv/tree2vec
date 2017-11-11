@@ -1,17 +1,34 @@
+import numpy
+
+
 class DepthExtractor:
-    def __call__(self, ast):
+    metric = 'mean'
+
+    metrics = {
+        'mean': numpy.mean,
+        'min': numpy.min,
+        'max': numpy.max
+    }
+
+    def __init__(self, ast):
         self.ast = ast
 
+    def __call__(self):
         return self.extract()
 
     def dfs(self, nodes, depths, path_number):
-        depths[path_number - 1] += 1
+        if len(depths) <= path_number:
+            depths.append(1)
+        else:
+            depths[path_number] += 1
         for node in nodes:
-            path_number += 1
             if 'children' in node:
                 depths = self.dfs(node['children'], depths, path_number)
+            path_number += 1
 
         return depths
 
     def extract(self):
-        return self.dfs(self.ast, [0], 1)
+        depths = self.dfs(self.ast, [], 0)
+
+        return self.metrics[self.metric](depths)

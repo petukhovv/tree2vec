@@ -1,4 +1,4 @@
-from .Features import DepthExtractor
+from .Features.DepthExtractor import DepthExtractor
 
 
 class FeatureExtractor:
@@ -22,6 +22,6 @@ class FeatureExtractor:
         feature_values = {}
 
         for feature in self.features:
-            feature_values[feature] = self.features[feature](self.ast)
+            feature_values[feature] = self.supported_features[feature](self.ast)()
 
         return feature_values

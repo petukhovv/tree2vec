@@ -1,5 +1,7 @@
 import sys
 
+from pprint import pprint
+
 from lib.Helpers.AstReader import AstReader
 from lib.FeatureExtraction.FeatureExtractor import FeatureExtractor
 
@@ -11,4 +13,7 @@ ast_file = sys.argv[1]
 
 root = AstReader.read(ast_file)
 
-features = FeatureExtractor(root)
+features_extractor = FeatureExtractor(root, ['depth'])
+features = features_extractor.extract()
+
+pprint(features)
