@@ -15,11 +15,11 @@ class CharsLengthExtractor:
         for node in nodes:
             lengths.append(len(node['chars']))
             if 'children' in node:
-                depths = self.dfs(node['children'], lengths)
+                lengths = self.dfs(node['children'], lengths)
 
         return lengths
 
-    def extract(self, ast):
+    def extract(self, ast, params):
         lengths = self.dfs(ast, [])
 
         return self.metrics[self.metric](lengths)

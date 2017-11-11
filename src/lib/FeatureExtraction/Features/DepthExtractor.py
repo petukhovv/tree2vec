@@ -23,7 +23,7 @@ class DepthExtractor:
 
         return depths
 
-    def extract(self, ast):
+    def extract(self, ast, params):
         depths = self.dfs(ast, [], 0)
 
         return self.metrics[self.metric](depths)
