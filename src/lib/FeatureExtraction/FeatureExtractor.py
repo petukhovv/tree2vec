@@ -1,9 +1,13 @@
 from .Features.DepthExtractor import DepthExtractor
+from .Features.CharsLengthExtractor import CharsLengthExtractor
 
 
 class FeatureExtractor:
     supported_features = {
-        'depth': DepthExtractor
+        'depth': DepthExtractor('max'),
+        'depth_avg': DepthExtractor('mean'),
+        'chars_length_avg': CharsLengthExtractor('mean'),
+        'chars_length_max': CharsLengthExtractor('max')  # it's full program length if use original Kotlin AST
     }
 
     def __init__(self, ast, features):
@@ -22,6 +26,6 @@ class FeatureExtractor:
         feature_values = {}
 
         for feature in self.features:
-            feature_values[feature] = self.supported_features[feature](self.ast)()
+            feature_values[feature] = self.supported_features[feature].extract(self.ast)
 
         return feature_values

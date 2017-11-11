@@ -13,7 +13,12 @@ ast_file = sys.argv[1]
 
 root = AstReader.read(ast_file)
 
-features_extractor = FeatureExtractor(root, ['depth'])
+features_extractor = FeatureExtractor(root, [
+    'depth',
+    'depth_avg',
+    'chars_length_avg',
+    'chars_length_max'
+])
 features = features_extractor.extract()
 
 pprint(features)

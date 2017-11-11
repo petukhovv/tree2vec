@@ -2,19 +2,14 @@ import numpy
 
 
 class DepthExtractor:
-    metric = 'mean'
-
     metrics = {
         'mean': numpy.mean,
         'min': numpy.min,
         'max': numpy.max
     }
 
-    def __init__(self, ast):
-        self.ast = ast
-
-    def __call__(self):
-        return self.extract()
+    def __init__(self, metric):
+        self.metric = metric
 
     def dfs(self, nodes, depths, path_number):
         if len(depths) <= path_number:
@@ -28,7 +23,7 @@ class DepthExtractor:
 
         return depths
 
-    def extract(self):
-        depths = self.dfs(self.ast, [], 0)
+    def extract(self, ast):
+        depths = self.dfs(ast, [], 0)
 
         return self.metrics[self.metric](depths)
