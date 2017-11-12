@@ -2,33 +2,50 @@ import numpy
 
 from pprint import pprint
 
-class NGramsNumberExtractor:
-    # Тут нужно реализовать составное условие:
-    # 1) Пушить глубину рекурсии в элемент пути и сверять разницу между глубиной рекурсии, которая была на первом элементе пути и записываемом
-    #       - если она больше переданной дистанции, сразу дропать этого кандидата на n-gram'у
-    # 2) Сверять идентификатор пути - n узлов из n-gram'ы должны обязательно лежать на одном пути. Если не лежат - сразу дропать кандидата
-    def dfs(self, nodes, matches_paths, params):
-        for node in nodes:
-            if node['type'] in params['node_types']:
-                matches_path_index = 0
-                for matches_path in matches_paths:
-                    if matches_path < len(params['node_types']) and params['node_types'][matches_path] == node['type']:
-                        matches_paths[matches_path_index] += 1
-                    matches_path_index += 1
 
-                if params['node_types'][0] == node['type']:
-                    matches_paths.append(1)
+class NGramsNumberExtractor:
+    def dfs(self, nodes, matches_paths, params, depth):
+        ngram_length = len(params['node_types'])
+        new_node = {
+            'length': 1,
+            'depth': depth
+        }
+
+        for node in nodes:
+            matches_candidates = matches_paths['candidates']
+            if node['type'] in params['node_types']:
+                for matches_path in matches_paths['candidates']:
+                    depth_diff = depth - matches_path['depth']
+
+                    if matches_path in matches_candidates and depth_diff <= 0:
+                        matches_candidates.remove(matches_path)
+
+                    if matches_path in matches_candidates\
+                            and matches_path['length'] < ngram_length\
+                            and params['node_types'][matches_path['length']] == node['type']\
+                            and depth_diff <= params['max_distance']:
+
+                        if matches_path['length'] + 1 == ngram_length:
+                            pprint(matches_paths['candidates'])
+                            pprint(depth)
+                            matches_candidates.remove(matches_path)
+                            matches_paths['found_matches'] += 1
+                        else:
+                            matches_path['length'] += 1
+                            matches_path['depth'] = depth
+
+                matches_paths['candidates'] = matches_candidates
+
+                if 'children' in node and params['node_types'][0] == node['type']:
+                    for _ in node['children']:
+                        matches_paths['candidates'].append(new_node)
 
             if 'children' in node:
-                matches_paths = self.dfs(node['children'], matches_paths, params)
+                matches_paths = self.dfs(node['children'], matches_paths, params, depth + 1)
 
         return matches_paths
 
-    def get_ngrams_number(self, ngram_candidates, params):
-        return ngram_candidates.count(len(params['node_types']))
-
     def extract(self, ast, params):
-        ngram_candidates = self.dfs(ast, [], params)
-        ngrams_number = self.get_ngrams_number(ngram_candidates, params)
+        ngram_candidates = self.dfs(ast, {'candidates': [], 'found_matches': 0}, params, 0)
 
-        return ngrams_number
+        return ngram_candidates['found_matches']

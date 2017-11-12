@@ -25,8 +25,8 @@ features = [
         'type': 'ngram',
         'params': {
             'name': 'for_for_5',
-            'node_types': ['DOT_QUALIFIED_EXPRESSION', 'DOT_QUALIFIED_EXPRESSION'],
-            'max_distance': 1
+            'node_types': ['FOR', 'WHILE'],
+            'max_distance': 2
         }
     }
 ]
