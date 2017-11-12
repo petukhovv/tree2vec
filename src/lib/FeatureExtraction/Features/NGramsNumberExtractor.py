@@ -26,8 +26,6 @@ class NGramsNumberExtractor:
                             and depth_diff <= params['max_distance']:
 
                         if matches_path['length'] + 1 == ngram_length:
-                            pprint(matches_paths['candidates'])
-                            pprint(depth)
                             matches_candidates.remove(matches_path)
                             matches_paths['found_matches'] += 1
                         else:
@@ -37,8 +35,9 @@ class NGramsNumberExtractor:
                 matches_paths['candidates'] = matches_candidates
 
                 if 'children' in node and params['node_types'][0] == node['type']:
-                    for _ in node['children']:
-                        matches_paths['candidates'].append(new_node)
+                    for node_child in node['children']:
+                        if params['node_types'][1] == node_child['type']:
+                            matches_paths['candidates'].append(new_node)
 
             if 'children' in node:
                 matches_paths = self.dfs(node['children'], matches_paths, params, depth + 1)
