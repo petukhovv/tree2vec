@@ -24,7 +24,22 @@ features = [
     {
         'type': 'ngram',
         'params': {
-            'name': 'for_for_5',
+            'name': 'dqe_dqe_1',
+            'node_types': ['DOT_QUALIFIED_EXPRESSION']
+        }
+    },
+    {
+        'type': 'ngram',
+        'params': {
+            'name': 'dqe_dqe_4',
+            'node_types': ['DOT_QUALIFIED_EXPRESSION', 'DOT_QUALIFIED_EXPRESSION', 'DOT_QUALIFIED_EXPRESSION', 'DOT_QUALIFIED_EXPRESSION'],
+            'max_distance': 1
+        }
+    },
+    {
+        'type': 'ngram',
+        'params': {
+            'name': 'dqe_dqe_2',
             'node_types': ['DOT_QUALIFIED_EXPRESSION', 'DOT_QUALIFIED_EXPRESSION'],
             'max_distance': 1
         }
