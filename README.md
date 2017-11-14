@@ -102,7 +102,8 @@ features = [
         'type': 'ngram',
         'params': {
             'name': 'dqe_dqe_1',
-            'node_types': ['CALL_EXPRESSION']
+            'node_types': ['CALL_EXPRESSION'],
+            'max_distance': 4
         }
     },
     {
@@ -124,3 +125,4 @@ features = [
 ]
 ```
 `node_types` - type of nodes, which should be on the one path in AST (according to specified distance).
+`name` - name of feature, it used in output (feature names).
