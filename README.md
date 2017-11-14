@@ -86,7 +86,7 @@ For example:
 
 ### Feature configuration
 
-Features are specified in main.py (keys array for simple features; and objects array for n-grams).
+Features are specified in main.py (keys array for simple features; and objects array for n-grams and other (in the future)).
 
 For example:
 ```
@@ -123,3 +123,4 @@ features = [
     }
 ]
 ```
+`node_types` - type of nodes, which should be on the one path in AST (according to specified distance).
