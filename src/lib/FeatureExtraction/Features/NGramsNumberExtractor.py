@@ -59,9 +59,9 @@ class NGramsNumberExtractor:
 
         return matches_paths
 
-    def dfs(self, nodes, matches_paths, params, depth):
+    def dfw(self, nodes, matches_paths, params, depth):
         """
-        Depth-first search in specified AST
+        Depth-first walk in specified AST
 
         :param nodes: AST or sub-AST
         :param matches_paths: Matches paths object (with candidates and found properties = n-grams number)

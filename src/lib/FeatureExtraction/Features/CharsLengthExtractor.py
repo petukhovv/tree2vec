@@ -11,7 +11,7 @@ class CharsLengthExtractor:
     def __init__(self, metric):
         self.metric = metric
 
-    def dfs(self, nodes, lengths):
+    def dfw(self, nodes, lengths):
         for node in nodes:
             lengths.append(len(node['chars']))
             if 'children' in node:

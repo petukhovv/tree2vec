@@ -11,7 +11,7 @@ class DepthExtractor:
     def __init__(self, metric):
         self.metric = metric
 
-    def dfs(self, nodes, depths, path_number):
+    def dfw(self, nodes, depths, path_number):
         if len(depths) <= path_number:
             depths.append(1)
         else:
