@@ -63,7 +63,7 @@ Also reqired AST transformer, which is a part of [**github-kotlin-code-collector
 
 File with JSON representation of AST must be passed as an argument of program.
 
-For example: `python src/main.py ast/my_program.json`
+For example: `python main.py ast/my_program.json`
 
 ### Vector format
 
@@ -78,9 +78,9 @@ For example:
   'chars_length_max': 2047,
   'depth': 16,
   'depth_avg': 6.3469387755102042,
-  'dqe_dqe_1': 0.06373937677053824,
-  'dqe_dqe_2': 0.028368794326241134,
-  'dqe_dqe_4': 0.005689900426742532
+  'CALL_EXPRESSION': 0.06373937677053824,
+  'DOT_QUALIFIED_EXPRESSION:REFERENCE_EXPRESSION:IDENTIFIER': 0.028368794326241134,
+  'DOT_QUALIFIED_EXPRESSION:DOT_QUALIFIED_EXPRESSION': 0.005689900426742532
 }
 ```
 
@@ -101,23 +101,22 @@ features = [
     {
         'type': 'ngram',
         'params': {
-            'name': 'dqe_dqe_1',
-            'node_types': ['CALL_EXPRESSION'],
-            'max_distance': 4
+            'name': 'CALL_EXPRESSION',
+            'node_types': ['CALL_EXPRESSION']
         }
     },
     {
         'type': 'ngram',
         'params': {
-            'name': 'dqe_dqe_4',
+            'name': 'DOT_QUALIFIED_EXPRESSION:REFERENCE_EXPRESSION:IDENTIFIER',
             'node_types': ['DOT_QUALIFIED_EXPRESSION', 'REFERENCE_EXPRESSION', 'IDENTIFIER'],
-            'max_distance': 1
+            'max_distance': 3
         }
     },
     {
         'type': 'ngram',
         'params': {
-            'name': 'dqe_dqe_2',
+            'name': 'DOT_QUALIFIED_EXPRESSION:DOT_QUALIFIED_EXPRESSION',
             'node_types': ['DOT_QUALIFIED_EXPRESSION', 'DOT_QUALIFIED_EXPRESSION'],
             'max_distance': 1
         }
