@@ -28,8 +28,6 @@ class NGramsNumberExtractor:
                     and params['node_types'][matches_path['length']] == node['type'] \
                     and depth_diff <= params['max_distance']:
 
-                pprint(matches_path['length'])
-
                 if matches_path['length'] + 1 == ngram_length:
                     matches_path_mutable['candidates'].remove(matches_path)
                     matches_path_mutable['found'] += 1
@@ -80,7 +78,7 @@ class NGramsNumberExtractor:
                 matches_paths = self.paths_branching_point_create(matches_paths, node, params, depth)
 
             if 'children' in node:
-                matches_paths = self.dfs(node['children'], matches_paths, params, depth=depth + 1)
+                matches_paths = self.dfw(node['children'], matches_paths, params, depth=depth + 1)
 
             matches_paths['nodes_number'] += 1
 
@@ -108,7 +106,7 @@ class NGramsNumberExtractor:
         :return: N-grams number
         """
         matches_paths = {'candidates': [], 'found': 0, 'nodes_number': 0}
-        matches_paths = self.dfs(ast, matches_paths, params, depth=0)
+        matches_paths = self.dfw(ast, matches_paths, params, depth=0)
         ngrams_number = self.normalize(matches_paths['found'], matches_paths['nodes_number'], params)
 
         return ngrams_number

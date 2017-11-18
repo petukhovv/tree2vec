@@ -18,12 +18,12 @@ class DepthExtractor:
             depths[path_number] += 1
         for node in nodes:
             if 'children' in node:
-                depths = self.dfs(node['children'], depths, path_number)
+                depths = self.dfw(node['children'], depths, path_number)
             path_number += 1
 
         return depths
 
     def extract(self, ast, params):
-        depths = self.dfs(ast, [], 0)
+        depths = self.dfw(ast, [], 0)
 
         return self.metrics[self.metric](depths)
