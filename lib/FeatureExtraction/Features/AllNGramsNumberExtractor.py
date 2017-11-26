@@ -76,6 +76,18 @@ class AllNGramsNumberExtractor:
 
         return ngrams
 
+
+    def is_gram_contain(self, gram, subgrams):
+        def sublist_exists(list1, list2):
+            return ''.join(map(str, list2)) in ''.join(map(str, list1))
+
+        is_gram_contain = False
+        for subgram in subgrams:
+            if sublist_exists(gram, subgram):
+                is_gram_contain = True
+
+        return is_gram_contain
+
     def group(self, ngrams, params):
         """
         N-grams grouping, excluding and calculating statistic (n-grams occurrences number)
@@ -87,6 +99,9 @@ class AllNGramsNumberExtractor:
         """
         ngram_grouped = {}
         ngram_statistic = [0] * params['n']
+        is_exclude_strict_specified = 'exclude_strict' in params and isinstance(params['exclude_strict'], list)
+        is_include_strict_specified = 'include_strict' in params and isinstance(params['include_strict'], list)\
+                                      and len(params['include_strict']) != 0
         is_exclude_specified = 'exclude' in params and isinstance(params['exclude'], list)
         is_include_specified = 'include' in params and isinstance(params['include'], list)\
                                and len(params['include']) != 0
@@ -94,9 +109,13 @@ class AllNGramsNumberExtractor:
         for grams_by_n in ngrams:
             for grams in grams_by_n:
                 for gram in grams:
-                    if is_exclude_specified and gram in params['exclude']:
+                    if is_exclude_strict_specified and gram in params['exclude_strict']:
                         continue
-                    if is_include_specified and gram not in params['include']:
+                    if is_include_strict_specified and gram not in params['include_strict']:
+                        continue
+                    if is_exclude_specified and self.is_gram_contain(gram, params['exclude']):
+                        continue
+                    if is_include_specified and not self.is_gram_contain(gram, params['include']):
                         continue
                     ngram_name = self.NGRAMS_NAME_SPLIT_SYMBOL.join(gram)
                     ngram_statistic[len(gram) - 1] += 1
