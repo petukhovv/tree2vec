@@ -11,7 +11,7 @@ class FeatureExtractor:
         'chars_length_avg': CharsLengthExtractor('mean'),
         'chars_length_max': CharsLengthExtractor('max'),  # it's full program length if use original Kotlin AST
         'ngram': NGramsNumberExtractor(),
-        'all_ngrams': AllNGramsNumberExtractor()  # extracting all ngram
+        'all_ngrams': AllNGramsNumberExtractor()  # extracting all n-grams
     }
 
     def __init__(self, ast, features):

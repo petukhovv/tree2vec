@@ -113,6 +113,7 @@ class AllNGramsNumberExtractor:
     def extract(self, ast, params):
         ngrams = self.dfw(ast[0], params, {'all': [], 'on_path': [], 'nodes_number': 0})
         ngrams_info = self.group(ngrams['all'], params)
-        ngrams_normalized = self.normalize(ngrams_info['grouped'], ngrams_info['statistic'])
+        ngrams_final = self.normalize(ngrams_info['grouped'], ngrams_info['statistic']) if not params['no_normalize']\
+            else ngrams_info['grouped']
 
-        return ngrams_normalized
+        return ngrams_final
