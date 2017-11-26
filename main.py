@@ -1,7 +1,5 @@
 import sys
 
-from pprint import pprint
-
 from lib.Helpers.AstReader import AstReader
 from lib.FeatureExtraction.FeatureExtractor import FeatureExtractor
 
@@ -32,5 +30,3 @@ features.extend(map(lambda feature: {'type': feature}, simple_features))
 
 features_extractor = FeatureExtractor(root, features)
 features = features_extractor.extract()
-
-pprint(features)
