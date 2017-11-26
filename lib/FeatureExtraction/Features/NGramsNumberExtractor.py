@@ -1,6 +1,5 @@
 import copy
 
-from pprint import pprint
 
 class NGramsNumberExtractor:
     def matches_paths_correct(self, matches_paths, node, params, depth):
