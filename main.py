@@ -1,13 +1,18 @@
-import sys
+import json
+import argparse
 
 from lib.Helpers.AstReader import AstReader
 from lib.FeatureExtraction.FeatureExtractor import FeatureExtractor
 
-if len(sys.argv) <= 1:
-    sys.stderr.write('File with AST not specified.\n')
-    exit()
+parser = argparse.ArgumentParser()
 
-ast_file = sys.argv[1]
+parser.add_argument('--input', '-i', nargs=1, type=str, help='file with AST')
+parser.add_argument('--output', '-o', nargs=1, type=str,
+                    help='Output file, which will contain features and feature values as JSON')
+args = parser.parse_args()
+
+ast_file = args.input[0]
+output = args.output[0]
 
 root = AstReader.read(ast_file)
 
@@ -30,3 +35,6 @@ features.extend(map(lambda feature: {'type': feature}, simple_features))
 
 features_extractor = FeatureExtractor(root, features)
 features = features_extractor.extract()
+
+with open(output, 'w') as f:
+    read_data = f.write(json.dumps(features, default=str))

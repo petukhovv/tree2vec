@@ -36,6 +36,6 @@ class FeatureExtractor:
             if isinstance(feature_value, dict):
                 feature_values = {**feature_values, **feature_value}
             else:
-                feature_values[feature_name] = feature_value
+                feature_values[feature_name] = float(feature_value)
 
         return feature_values
