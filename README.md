@@ -2,7 +2,7 @@
 
 ### Description
 
-Transformation AST of some programming language code to a vector.
+Transformation AST of code in some programming language to a vector.
 The vector is constructed using feature extraction from AST.
 
 Program consist the following feature extractors:
