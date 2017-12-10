@@ -125,6 +125,7 @@ features = [
 ]
 ```
 `node_types` - type of nodes, which should be on the one path in AST (according to specified distance).
+
 `name` - name of feature, it used in output (feature names).
 
 Example with all n-grams with specified configuration:
