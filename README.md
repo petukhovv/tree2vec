@@ -160,4 +160,4 @@ features = [
 * **include**: array of arrays with sub-n-gram witch should be **contained** in the found n-grams;
 * **include_strict**: required n-grams (the remaining n-grams found will be removed);
 * **exclude**: array of arrays with sub-n-gram witch should be **not contained** in the found n-grams;
-* **exclude_strict**: n-grams, which should be excluded;
+* **exclude_strict**: n-grams, which should be excluded.
