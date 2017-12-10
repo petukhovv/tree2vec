@@ -9,6 +9,7 @@ Program consist the following feature extractors:
 - **DepthExtractor** - min, max or mean depth extraction from AST;
 - **CharsLengthExtractor** - min, max or mean chars length (for some node) from AST;
 - **NGramsNumberExtractor** - calculating number of specified n-grams.
+- **AllNGramsNumberExtractor** - calculating number of all n-grams by specified configuration (n, max_distance, etc).
 
 ### AST format
 
@@ -88,7 +89,7 @@ For example:
 
 Features are specified in main.py (keys array for simple features; and objects array for n-grams and other (in the future)).
 
-For example:
+Example with specified n-grams:
 ```
 simple_features = [
     'depth',
@@ -125,3 +126,37 @@ features = [
 ```
 `node_types` - type of nodes, which should be on the one path in AST (according to specified distance).
 `name` - name of feature, it used in output (feature names).
+
+Example with all n-grams with specified configuration:
+
+```
+simple_features = [
+    'depth',
+    'depth_avg',
+    'chars_length_avg',
+    'chars_length_max'
+]
+
+features = [
+    {
+       'type': 'all_ngrams',
+       'params': {
+           'n': 3,
+           'max_distance': 3,
+           'no_normalize': True,
+           'include': [['CALL_EXPRESSION', 'LPAR'], ['VALUE_ARGUMENT_LIST'], ['SAFE_ACCESS_EXPRESSION']],
+           'exclude': [['FUN']]
+       }
+   }
+]
+```
+
+### All n-grams extractor arguments
+
+* n: max n in n-gram;
+* max_distance: max distance between neighboring nodes (window);
+* no_normalize: flag to normalize values (n-grams number);
+* include: array of arrays with sub-n-gram witch should be **contained** in the found n-grams;
+* include_strict: required n-grams (the remaining n-grams found will be removed);
+* exclude: array of arrays with sub-n-gram witch should be **not contained** in the found n-grams;
+* exclude_strict: n-grams, which should be excluded;
