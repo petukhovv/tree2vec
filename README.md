@@ -151,7 +151,7 @@ features = [
 ]
 ```
 
-### All n-grams extractor arguments
+#### All n-grams extractor arguments
 
 * n: max n in n-gram;
 * max_distance: max distance between neighboring nodes (window);
