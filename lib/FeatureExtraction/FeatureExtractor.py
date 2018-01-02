@@ -1,7 +1,7 @@
 from .Features.DepthExtractor import DepthExtractor
 from .Features.CharsLengthExtractor import CharsLengthExtractor
-from .Features.NGramsNumberExtractor import NGramsNumberExtractor
-from .Features.AllNGramsNumberExtractor import AllNGramsNumberExtractor
+from .Features.NGramsExtractor import NGramsNumberExtractor
+from .Features.AllNGramsExtractor import AllNGramsNumberExtractor
 
 
 class FeatureExtractor:
