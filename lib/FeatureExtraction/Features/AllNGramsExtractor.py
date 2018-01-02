@@ -1,7 +1,7 @@
 from copy import copy
 
 
-class AllNGramsNumberExtractor:
+class AllNGramsExtractor:
     NGRAMS_NAME_SPLIT_SYMBOL = ':'
 
     def ngrams_recurrent_build(self, n, params, ngrams_on_path, node_type):
