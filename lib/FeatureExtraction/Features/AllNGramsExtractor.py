@@ -1,4 +1,4 @@
-from copy import copy, deepcopy
+from copy import copy
 
 
 class AllNGramsNumberExtractor:
@@ -75,7 +75,6 @@ class AllNGramsNumberExtractor:
             ngrams[ngram] /= ngrams_statistic[n - 1]
 
         return ngrams
-
 
     def is_gram_contain(self, gram, subgrams):
         def sublist_exists(list1, list2):
