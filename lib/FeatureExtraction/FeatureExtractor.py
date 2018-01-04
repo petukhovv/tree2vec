@@ -1,6 +1,6 @@
 from .Features.DepthExtractor import DepthExtractor
 from .Features.CharsLengthExtractor import CharsLengthExtractor
-from .Features.NGramsExtractor import NGramsExtractor
+from .Features.NGramsExtractor import NGramsNumberExtractor
 from .Features.AllNGramsExtractor import AllNGramsExtractor
 
 
@@ -10,7 +10,7 @@ class FeatureExtractor:
         'depth_avg': DepthExtractor('mean'),
         'chars_length_avg': CharsLengthExtractor('mean'),
         'chars_length_max': CharsLengthExtractor('max'),  # it's full program length if use original Kotlin AST
-        'ngram': NGramsExtractor(),
+        'ngram': NGramsNumberExtractor(),
         'all_ngrams': AllNGramsExtractor()  # extracting all n-grams
     }
 

@@ -7,13 +7,14 @@ from lib.FeatureExtraction.FeatureExtractor import FeatureExtractor
 parser = argparse.ArgumentParser()
 parser.add_argument('--input', '-i', nargs=1, type=str, help='file with AST')
 parser.add_argument('--output', '-o', nargs=1, type=str,
-                    help='Output file, which will contain features and feature values as JSON')
-parser.add_argument('--no_normalize', action='store_true')
+                    help='output file, which will contain features and feature values as JSON')
+parser.add_argument('--is_normalize', action='store_true',
+                    help='normalization necessary of vectors on the maximum value')
 args = parser.parse_args()
 
 ast_file = args.input[0]
 output = args.output[0]
-no_normalize = args.no_normalize
+no_normalize = not args.is_normalize
 
 root = AstReader.read(ast_file)
 
@@ -39,4 +40,4 @@ features_extractor = FeatureExtractor(root, features)
 features = features_extractor.extract()
 
 with open(output, 'w') as f:
-    read_data = f.write(json.dumps(features, default=str))
+    f.write(json.dumps(features, default=str))

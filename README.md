@@ -8,8 +8,23 @@ The vector is constructed using feature extraction from AST.
 Program consist the following feature extractors:
 - **DepthExtractor** - min, max or mean depth extraction from AST;
 - **CharsLengthExtractor** - min, max or mean chars length (for some node) from AST;
-- **NGramsNumberExtractor** - calculating number of specified n-grams.
-- **AllNGramsNumberExtractor** - calculating number of all n-grams by specified configuration (n, max_distance, etc).
+- **NGramsExtractor** - calculating number of specified n-grams.
+- **AllNGramsExtractor** - calculating number of all n-grams by specified configuration (n, max_distance, etc). See [ast-ngram-extractor](https://github.com/PetukhovVictor/ast-ngram-extractor) (for only n-grams extraction)
+
+**This program is used as part of [ast-set2matrix](https://github.com/PetukhovVictor/ast-set2matrix)**
+
+
+### Example of use
+
+```
+python3 main.py -i ./ast/my_code_as_ast.json -o ./ast_vectors/my_code_as_vector.json --no_normalize
+```
+
+## Program arguments
+
+- **--input (i-)**: file with AST
+- **--output (o-)**: Output file, which will contain features and feature values as JSON
+- **--is_normalize (d-)**: normalization necessary of vectors on the maximum value
 
 ### AST format
 

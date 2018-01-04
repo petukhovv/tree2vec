@@ -1,7 +1,7 @@
 import copy
 
 
-class NGramsExtractor:
+class NGramsNumberExtractor:
     def matches_paths_correct(self, matches_paths, node, params, depth):
         """
         Check and correct matches path depending on allowed node types and distances
