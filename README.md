@@ -20,7 +20,7 @@ Program consist the following feature extractors:
 python3 main.py -i ./ast/my_code_as_ast.json -o ./ast_vectors/my_code_as_vector.json --no_normalize
 ```
 
-## Program arguments
+### Program arguments
 
 - **--input (i-)**: file with AST
 - **--output (o-)**: Output file, which will contain features and feature values as JSON
