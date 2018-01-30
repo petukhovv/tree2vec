@@ -1,8 +1,6 @@
-import json
 import argparse
 
-from lib.Helpers.AstReader import AstReader
-from lib.FeatureExtraction.FeatureExtractor import FeatureExtractor
+from .feature_extractor import feature_extractor
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--input', '-i', nargs=1, type=str, help='file with AST')
@@ -15,8 +13,6 @@ args = parser.parse_args()
 ast_file = args.input[0]
 output = args.output[0]
 no_normalize = not args.is_normalize
-
-root = AstReader.read(ast_file)
 
 simple_features = [
     'depth',
@@ -36,8 +32,4 @@ features = [{
 
 features.extend(map(lambda feature: {'type': feature}, simple_features))
 
-features_extractor = FeatureExtractor(root, features)
-features = features_extractor.extract()
-
-with open(output, 'w') as f:
-    f.write(json.dumps(features, default=str))
+feature_extractor(ast_file, features, output)
