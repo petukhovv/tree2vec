@@ -1,7 +1,7 @@
 import json
 
-from lib.Helpers.AstReader import AstReader
-from lib.FeatureExtraction.FeatureExtractor import FeatureExtractor
+from .lib.Helpers.AstReader import AstReader
+from .lib.FeatureExtraction.FeatureExtractor import FeatureExtractor
 
 
 def feature_extractor(ast_file, features, output):
