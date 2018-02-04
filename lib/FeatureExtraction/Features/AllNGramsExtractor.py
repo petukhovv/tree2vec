@@ -2,6 +2,7 @@ from copy import copy
 
 
 class AllNGramsExtractor:
+    NONE_TYPE = 'NONE'
     NGRAMS_NAME_SPLIT_SYMBOL = ':'
 
     def ngrams_recurrent_build(self, n, params, ngrams_on_path, node_type):
@@ -43,12 +44,13 @@ class AllNGramsExtractor:
         """
         n_bound = min(params['n'], depth)
         ngrams_on_path_for_current = [None] * n_bound
+        node_type = node['type'] if 'type' in node else self.NONE_TYPE
         i = 1
         while i < n_bound:
-            ngrams_on_path_for_current[i] = self.ngrams_recurrent_build(i, params, ngrams['on_path'], node['type'])
+            ngrams_on_path_for_current[i] = self.ngrams_recurrent_build(i, params, ngrams['on_path'], node_type)
             i += 1
 
-        ngrams_on_path_for_current[0] = [[node['type']]]
+        ngrams_on_path_for_current[0] = [[node_type]]
         ngrams['on_path'].append(ngrams_on_path_for_current)
         ngrams['all'].append(ngrams_on_path_for_current)
 
