@@ -1,69 +1,61 @@
-# ast2vec
+# tree2vec
 
 ### Description
 
-Transformation AST of code in some programming language to a vector.
-The vector is constructed using feature extraction from AST.
+Transformation tree (e.g. AST, CST, PSI) to a vector.
+The vector is constructed using feature extraction from tree.
 
 Program consist the following feature extractors:
-- **DepthExtractor** - min, max or mean depth extraction from AST;
+- **DepthExtractor** - min, max or mean depth extraction from tree;
 - **CharsLengthExtractor** - min, max or mean chars length (for some node) from AST;
 - **NGramsExtractor** - calculating number of specified n-grams.
 - **AllNGramsExtractor** - calculating number of all n-grams by specified configuration (n, max_distance, etc). See [ast-ngram-extractor](https://github.com/PetukhovVictor/ast-ngram-extractor) (for only n-grams extraction)
 
-**This program is used as part of [ast-set2matrix](https://github.com/PetukhovVictor/ast-set2matrix)**
+**This program is used as part of [tree-set2matrix](https://github.com/PetukhovVictor/tree-set2matrix)**
 
 
 ### Example of use
 
 ```
-python3 main.py -i ./ast/my_code_as_ast.json -o ./ast_vectors/my_code_as_vector.json --no_normalize
+python3 main.py -i ./trees/ast.json -o ./trees_as_vectors/ast_as_vector.json --no_normalize
 ```
 
 ### Program arguments
 
-- `-i`, `--input`: file with AST
+- `-i`, `--input`: file with tree
 - `-o`, `--output`: output file, which will contain features and feature values as JSON
 - `-d`, `--is_normalize`: normalization necessary of vectors on the maximum value
 
-### AST format
+### Tree format
 
-The program is required on input the AST of the following format (example input):
+The program is required on input the tree of the following format (example input):
 ```
 [
    {
       "type":"FUN",
-      "chars":"override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {\n        dialog.window.requestFeature(Window.FEATURE_NO_TITLE)\n\n        DaggerAppComponent.builder()\n                .appModule(AppModule(context))\n                .mainModule((activity.application as MyApplication).mainModule)\n                .build().inject(this)\n\n        var view = inflater?.inflate(R.layout.dialog_signup, container, false)\n\n        ButterKnife.bind(this, view!!)\n\n        return view\n    }",
       "children":[
          {
             "type":"MODIFIER_LIST",
-            "chars":"override",
             "children":[
                {
                   "type":"override",
-                  "chars":"override"
                }
             ]
          },
          {
             "type":"IDENTIFIER",
-            "chars":"onCreateView"
          },
          {
             "type":"VALUE_PARAMETER_LIST",
-            "chars":"(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?)",
             "children":[
                {
                   "type":"LPAR",
-                  "chars":"("
                },
                {
                   "type":"VALUE_PARAMETER",
-                  "chars":"inflater: LayoutInflater?",
                   "children":[
                      {
-                        "type":"IDENTIFIER",
-                        "chars":"inflater"
+                         "type":"IDENTIFIER",
                      }
                   ]
                }
