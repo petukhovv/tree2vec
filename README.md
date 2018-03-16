@@ -7,7 +7,7 @@ The vector is constructed using feature extraction from tree.
 
 Program consist the following feature extractors:
 - **DepthExtractor** - min, max or mean depth extraction from tree;
-- **CharsLengthExtractor** - min, max or mean chars length (for some node) from AST;
+- **CharsLengthExtractor** - min, max or mean chars length (for some node) from tree;
 - **NGramsExtractor** - calculating number of specified n-grams.
 - **AllNGramsExtractor** - calculating number of all n-grams by specified configuration (n, max_distance, etc). See [ast-ngram-extractor](https://github.com/PetukhovVictor/ast-ngram-extractor) (for only n-grams extraction)
 
