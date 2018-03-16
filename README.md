@@ -23,7 +23,7 @@ python3 main.py -i ./ast/my_code_as_ast.json -o ./ast_vectors/my_code_as_vector.
 ### Program arguments
 
 - `-i`, `--input`: file with AST
-- `-o`, `--output`: Output file, which will contain features and feature values as JSON
+- `-o`, `--output`: output file, which will contain features and feature values as JSON
 - `-d`, `--is_normalize`: normalization necessary of vectors on the maximum value
 
 ### AST format
@@ -169,10 +169,10 @@ features = [
 
 #### All n-grams extractor arguments
 
-* **n**: max n in n-gram;
-* **max_distance**: max distance between neighboring nodes (window);
-* **no_normalize**: flag to normalize values (n-grams number);
-* **include**: array of arrays with sub-n-gram witch should be **contained** in the found n-grams;
-* **include_strict**: required n-grams (the remaining n-grams found will be removed);
-* **exclude**: array of arrays with sub-n-gram witch should be **not contained** in the found n-grams;
-* **exclude_strict**: n-grams, which should be excluded.
+* `n`: max n in n-gram;
+* `max_distance`: max distance between neighboring nodes (window);
+* `no_normalize`: flag to normalize values (n-grams number);
+* `include`: array of arrays with sub-n-gram witch should be **contained** in the found n-grams;
+* `include_strict`: required n-grams (the remaining n-grams found will be removed);
+* `exclude`: array of arrays with sub-n-gram witch should be **not contained** in the found n-grams;
+* `exclude_strict`: n-grams, which should be excluded.
